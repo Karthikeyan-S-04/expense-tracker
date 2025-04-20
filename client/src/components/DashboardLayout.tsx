@@ -14,7 +14,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ModeToggle } from "@/components/mode-toggle";
 import axios from "../api/axios"
-import { useAuth } from "../context/AuthContext"; // You'll need to create this auth hook
+import { useAuth } from "../context/AuthContext";
 
 interface DashboardLayoutProps {
   children: ReactNode;
@@ -28,11 +28,9 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
     email?: string;
   }
   
-  const [userData, setUserData] = useState<UserData | null>(null); // Placeholder for user data
+  const [userData, setUserData] = useState<UserData | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { logout } = useAuth(); // Uncomment when you have the auth hook
-
-  // Placeholder user data, replace with actual user data from auth context
+  const { logout } = useAuth();
 
   const fetchCurrentUser = async (token: string) => {
     try {
@@ -53,9 +51,6 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
       fetchCurrentUser(token);
     }
   }, [token]);
-
-  // Usage example:
-  // const userData = await fetchCurrentUser(token);
 
   const user = {
     name: userData?.name || "User",
@@ -81,7 +76,6 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   ];
 
   const handleLogout = () => {
-    // Implement logout logic here
     logout();
   };
 
@@ -90,7 +84,9 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
       {/* Desktop Sidebar */}
       <aside className="hidden md:flex flex-col w-64 border-r bg-card">
         <div className="p-6 border-b">
-          <h2 className="text-2xl font-bold">Expense Tracker</h2>
+          <Link to="/" className="text-2xl font-bold cursor-pointer border-none relative after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-current after:transition-all after:duration-300 hover:after:w-full">
+            Expense Tracker
+          </Link>
         </div>
 
         <div className="flex-1 py-6 px-4">
